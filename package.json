@@ -1,0 +1,29 @@
+{
+  "name": "coding-agent-rules",
+  "version": "0.1.0",
+  "description": "Native adapter and risk-based rules kit for coding agents.",
+  "bin": {
+    "ai-rules": "bin/ai-rules.js",
+    "coding-agent-rules": "bin/ai-rules.js"
+  },
+  "files": [
+    ".ai/**/*",
+    ".claude/CLAUDE.md",
+    ".github/copilot-instructions.md",
+    ".cursorrules",
+    ".windsurfrules",
+    "AGENTS.md",
+    "CONVENTIONS.md",
+    "README.md",
+    "bin/ai-rules.js",
+    "install-rules.ps1",
+    "sync-rules.ps1"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thaitantai/coding-agent-rules.git"
+  }
+}

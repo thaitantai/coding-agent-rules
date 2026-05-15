@@ -49,6 +49,8 @@ AGENTS.md                         # Native adapter cho Codex
 CONVENTIONS.md                    # Native adapter cho Aider
 sync-rules.ps1                    # Script sync adapter
 install-rules.ps1                 # Installer de tai rules tu GitHub
+package.json                      # Cho phep cai bang npx tu GitHub
+bin/ai-rules.js                   # CLI cai dat agent rules
 ```
 
 ## Cách hoạt động
@@ -114,31 +116,35 @@ Set-Location your-project
 powershell -ExecutionPolicy Bypass -File sync-rules.ps1
 ```
 
-### Cách 2: Cài từ GitHub theo agent
+### Cách 2: Cài bằng npx
 
-Sau khi push repo rules này lên GitHub, dùng raw base URL:
-
-```text
-https://raw.githubusercontent.com/<owner>/<repo>/<branch>
-```
-
-Ví dụ cài rules cho Codex vào root project hiện tại:
+Đây là cách ngắn nhất cho project mới. Chạy trong root project cần cài rules:
 
 ```powershell
-$base = "https://raw.githubusercontent.com/<owner>/<repo>/main"
-Invoke-WebRequest "$base/install-rules.ps1" -OutFile install-rules.ps1
-powershell -ExecutionPolicy Bypass -File install-rules.ps1 -Agent codex -SourceBaseUrl $base -InstallPath . -Force
+npx github:thaitantai/coding-agent-rules codex
 ```
 
-Chỉ định agent khác bằng `-Agent`:
+Chọn agent khác bằng tham số đầu tiên:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File install-rules.ps1 -Agent claude -SourceBaseUrl $base -InstallPath . -Force
-powershell -ExecutionPolicy Bypass -File install-rules.ps1 -Agent cursor -SourceBaseUrl $base -InstallPath . -Force
-powershell -ExecutionPolicy Bypass -File install-rules.ps1 -Agent all -SourceBaseUrl $base -InstallPath . -Force
+npx github:thaitantai/coding-agent-rules claude
+npx github:thaitantai/coding-agent-rules cursor
+npx github:thaitantai/coding-agent-rules all
 ```
 
-Installer luôn tải `.ai/` vì native adapter cần các file core/rules/index chung. Agent-specific chỉ quyết định native adapter nào được cài:
+Ghi đè file đã tồn tại:
+
+```powershell
+npx github:thaitantai/coding-agent-rules codex --force
+```
+
+Cài vào thư mục khác:
+
+```powershell
+npx github:thaitantai/coding-agent-rules codex --target ./my-project
+```
+
+CLI luôn cài `.ai/` vì native adapter cần các file core/rules/index chung. Agent-specific chỉ quyết định native adapter nào được cài:
 
 | Agent | File được cài |
 |---|---|
@@ -150,7 +156,31 @@ Installer luôn tải `.ai/` vì native adapter cần các file core/rules/index
 | `aider` | `CONVENTIONS.md` |
 | `all` | tất cả native adapters |
 
-Không dùng `-Force` thì installer sẽ bỏ qua file đã tồn tại để tránh overwrite.
+Không dùng `--force` thì CLI sẽ bỏ qua file đã tồn tại để tránh overwrite.
+
+### Cách 3: Cài bằng PowerShell raw URL
+
+Dùng cách này nếu máy không dùng `npx`. Raw base URL:
+
+```text
+https://raw.githubusercontent.com/thaitantai/coding-agent-rules/main
+```
+
+Ví dụ cài rules cho Codex vào root project hiện tại:
+
+```powershell
+$base = "https://raw.githubusercontent.com/thaitantai/coding-agent-rules/main"
+Invoke-WebRequest "$base/install-rules.ps1" -OutFile install-rules.ps1
+powershell -ExecutionPolicy Bypass -File install-rules.ps1 -Agent codex -SourceBaseUrl $base -InstallPath . -Force
+```
+
+Chỉ định agent khác bằng `-Agent`:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File install-rules.ps1 -Agent claude -SourceBaseUrl $base -InstallPath . -Force
+powershell -ExecutionPolicy Bypass -File install-rules.ps1 -Agent cursor -SourceBaseUrl $base -InstallPath . -Force
+powershell -ExecutionPolicy Bypass -File install-rules.ps1 -Agent all -SourceBaseUrl $base -InstallPath . -Force
+```
 
 ### Chỉnh rule
 

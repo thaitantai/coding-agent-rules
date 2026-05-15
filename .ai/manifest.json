@@ -15,6 +15,7 @@
     ".ai/rules/008-performance.md",
     ".ai/rules/009-api-design.md",
     ".ai/rules/010-environment.md",
+    "install-rules.ps1",
     "sync-rules.ps1"
   ],
   "nativeAdapters": {
