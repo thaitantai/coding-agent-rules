@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "sharedFiles": [
+    ".ai/agent-core.md",
+    ".ai/rules-index.md",
+    ".ai/reference-index.md",
+    ".ai/manifest.json",
+    ".ai/rules/001-general.md",
+    ".ai/rules/002-file-structure.md",
+    ".ai/rules/003-code-quality.md",
+    ".ai/rules/004-typescript.md",
+    ".ai/rules/005-testing.md",
+    ".ai/rules/006-git.md",
+    ".ai/rules/007-security.md",
+    ".ai/rules/008-performance.md",
+    ".ai/rules/009-api-design.md",
+    ".ai/rules/010-environment.md",
+    "sync-rules.ps1"
+  ],
+  "nativeAdapters": {
+    "codex": {
+      "name": "OpenAI Codex",
+      "path": "AGENTS.md"
+    },
+    "cursor": {
+      "name": "Cursor",
+      "path": ".cursorrules"
+    },
+    "windsurf": {
+      "name": "Windsurf",
+      "path": ".windsurfrules"
+    },
+    "claude": {
+      "name": "Claude Code",
+      "path": ".claude/CLAUDE.md"
+    },
+    "copilot": {
+      "name": "GitHub Copilot",
+      "path": ".github/copilot-instructions.md"
+    },
+    "aider": {
+      "name": "Aider",
+      "path": "CONVENTIONS.md"
+    }
+  }
+}
